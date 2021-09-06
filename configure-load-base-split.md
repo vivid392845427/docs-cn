@@ -72,18 +72,17 @@ Load Base Split 后的 Region 不会被迅速 Merge，PD 的 `MergeChecker` 会�
     curl "http://ip:status_port/config"
     ```
 
-
 ## 监控信息
 
 与 load base split 相关的监控有两个面板，在 TiKV Detail 中 Raft Admin 下的 "Load base split event" 和 "TopN QPS exceeds threshold"。
 
 前者的内容通常来说有三类：
+
 1. load_fit，也即 region 的 QPS 或者 Byte 流量符合切分的需求
 2. no_fit_key，也即没有合适的 key 去 split。
 3. prepare_to_split，也即准备去 split。
 
 后者则可以看到每个 store 中 QPS 超过阈值的 Region，默认显示 Top1，最多能显示 Top10。值得一提的是，如果想查看更详细的信息，可以通过 pd-ctl 使用 `pd-ctl hot read` 去查询。
-
 
 > **注意：**
 >
