@@ -34,9 +34,9 @@ Load Base Split 后的 Region 不会短时间内被 Merge，因为 PD 的 `Merge
 
 目前默认开启 Load Base Split，但配置相对保守，`split.qps-threshold` 默认为 `3000`，`split.byte-threshold` 默认为 30MB/s，满足任何一个条件即会进行 split。如果想要关闭这个功能，将这两个阈值全部都调到足够高即可。
 
-对于选择 key 的阈值，则由`split.split-balance-score`和`split.split-contained-score`控制，前者确保 Region 切分后左右访问尽量均匀，数值越小越均匀，但也可能导致无法切分；后者避免 split 产生过多跨 region 的请求，数值越小，Region 切分后跨 Region 的访问越少。`split.split-balance-score` 默认值是 0.25，`split.split-contained-score` 默认值是 0.5。
+对于选择 key 的阈值，则由`split.split-balance-score`和`split.split-contained-score`控制，前者确保 Region 切分后左右访问尽量均匀，数值越小越均匀，但也可能导致无法切分；后者避免 split 产生过多跨 Region 的请求，数值越小，切分后跨 Region 的访问越少。`split.split-balance-score` 默认值是 0.25，`split.split-contained-score` 默认值是 0.5。
 
-如果期待有 Load Base split，但是却没有，一般有两种原因，一种是 Region 的 qps 和 byte 均低于阈值，这个时候可以根据当前集群中流量较大的 region 向下进行调整；另一种是没有合适的 key 进行切分，这时候监控会有 load_fit 和 no_fit_key 同时出现，可以根据具体的原因进行调整，但需要注意的是，可能会导致切分后流量不均匀或者产生跨 Region 的请求过多而降低性能。
+如果期待有 Load Base split，但是却没有，一般有两种原因，一种是 Region 的 QPS 和 byte 均低于阈值，这个时候可以根据当前集群中流量较大的 region 向下进行调整；另一种是没有合适的 key 进行切分，这时候监控会有 load_fit 和 no_fit_key 同时出现，可以根据具体的原因进行调整，但需要注意的是，可能会导致切分后流量不均匀或者产生跨 Region 的请求过多而降低性能。
 
 以`split.qps-threshold`为例，目前有两种办法修改配置：
 
