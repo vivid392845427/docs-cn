@@ -76,7 +76,7 @@ Load Base Split 后的 Region 不会短时间内被 Merge，因为 PD 的 `Merge
 
 ## 监控信息
 
-与 load base split 相关的监控有两个面板，在 TiKV Detail 中 Raft Admin 下的 "Load base split event" 和 "TopN QPS exceeds threshold"。
+与 Load Base Split 相关的监控有两个面板，在 TiKV Detail 中 Raft Admin 下的 "Load base split event" 和 "TopN QPS exceeds threshold"。
 
 前者的内容通常来说有三类：
 
