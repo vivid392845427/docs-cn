@@ -26,7 +26,7 @@ Load Base Split 会基于统计信息自动拆分 Region。通过统计去识别
 
 在选择 key 的时候，会考虑两点，既要让 split key 两侧的查询尽可能均衡，也要尽可能少地产生 split 后跨 region 的请求。这些 key 的候选者来自于最近 10s 中采样的请求。
 
-Load Base Split 后的 Region 不会被迅速 Merge，PD 的 `MergeChecker` 会跳过 hot Region。
+Load Base Split 后的 Region 不会短时间内被 Merge，因为 PD 的 `MergeChecker` 会跳过 hot Region。
 
 ## 使用方法
 
